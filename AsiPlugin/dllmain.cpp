@@ -16,16 +16,6 @@
 
 using namespace std;
 
-//fonts
-/*
-int* whiteFont  = (int*)*(int*)0x6CED18;
-int* matrix1Fon = (int*)*(int*)0x6CED44;
-int* matrix2Fon = (int*)*(int*)0x6CED4C;
-int* LargeFont  = (int*)*(int*)0x6CED48;
-int* menublkFon = (int*)*(int*)0x6CED50;
-int* menuFont   = (int*)*(int*)0x696880;
-*/
-
 char debugText[512];
 
 void __cdecl DrawText2D(int *surface, int x, int y, int *font, char *text, unsigned int color, int isRealColor){
@@ -45,54 +35,16 @@ int* LargeFont  = (int*)0x6CED48; //
 int* menublkFon = (int*)0x6CED50; //black
 int* menuFont   = (int*)0x696880; //blue
 
-//int colIdx = 0;
-
 void drawDebugInfo(int* surface){
-
-	/*
-	if (IsKeyPressed(73)){ //i
-		colIdx++;
-	}
-	//if (IsKeyPressed(74)){ //j
-	//	PrintUpgradesInfo();
-	//}
-	if (IsKeyPressed(75)){ //k
-		colIdx--;
-	}
-
-	if (colIdx < 0)
-		colIdx = 0;
-
-	sprintf(debugText, "debug info: %d", colIdx);
-	*/
-
-	//if (!(int*)0x6D2098 || !surface)
 	if (!surface)
 		return;
 
-
 	int* font = (int*)*matrix1Fon;
-
-	//sprintf(debugText, "debug info");
 
 	int win_xres = *(int*)0x69688C;
 	int win_yres = *(int*)0x696890;
 
-	//DrawText2D(surface, win_xres / 2, 41, (int*)*menublkFon, debugText, 0, 0); //text shadow
 	DrawText2D(surface, win_xres / 2, win_yres - 128, font, debugText, 0, 0); //text
-
-	//if (*(int*)0x6D2098)
-	//	sub_575680();
-
-	//if (!*(int*)0x6D2098)
-
-	//int* font1 = (int*)*matrix1Fon;
-	//int* font2 = (int*)*matrix2Fon;
-	//colors: 0 - black, 4 - white, 5 - red (from LOAD.RES->menu_.plm)
-	//DrawText2D(surface, 41, 41, font1, debugText, 8, 1); //text shadow
-	//DrawText2D(surface, 40, 40, font2, debugText, 0, 1); //text
-
-	//cout << "drawDebugInfo\n";
 }
 
 int __cdecl sub_4D2BB0(int *surface){
@@ -214,13 +166,13 @@ bool __fastcall func_558EB0(int* tractor, int EDX){
 	CMatrix playerCar_mtx;
 	CMatrix trailerCar_mtx;
 		
-	//через Car_V
+	//С‡РµСЂРµР· Car_V
 	//CVector* tractorInertia   = (CVector*)(((char*)tractorCar_V) + 0x1F48);
 	//float*   tractorMass      = (float*)(((char*)tractorCar_V) + 0x2640);
 	//CVector* strailerInertia   = (CVector*)(((char*)strailerCar_V) + 0x1F48);
 	//float*   strailerMass      = (float*)(((char*)strailerCar_V) + 0x2640);
 
-	//через Vehicle
+	//С‡РµСЂРµР· Vehicle
 	CVector* tractorInertia  = (CVector*)(((char*)tractor) + 0xCE8);
 	float*   tractorMass  = (float*)(((char*)tractor) + 0xCD4);
 
@@ -229,20 +181,20 @@ bool __fastcall func_558EB0(int* tractor, int EDX){
 
 	CVector tractor_iW0, strailer_iW0, tractor_wV0, strailer_wV0;
 
-	//параметры сцепки из vehicle.tech
+	//РїР°СЂР°РјРµС‚СЂС‹ СЃС†РµРїРєРё РёР· vehicle.tech
 	CVector tchTractorSaddle     = *((CVector*)((0x697888 + (2416 *  tractorTechID) + 0x7D0))); //lowSaddle
 	CVector tchSTrailerSaddle    = *((CVector*)((0x697888 + (2416 * strailerTechID) + 0x7DC))); //topSaddle
 	float tchTractorShiftSaddle  = *((float*)((0x697888 + (2416 * tractorTechID) + 0x800)));    //shiftSaddle
 	float tchSTrailerShiftSaddle = *((float*)((0x697888 + (2416 * strailerTechID) + 0x800)));
 
-	//шо? каво?
+	//С€Рѕ? РєР°РІРѕ?
 	CMatrix* tractor_m2C4  = (CMatrix*)(((char*)tractor) + 0x2C4);
 	CMatrix* strailer_m2C4 = (CMatrix*)(((char*)strailer) + 0x2C4);
 
 	CMatrix v277;
 	CVector v278, v279, v286;
 
-	//в оригинальном коде нигде им значения не присваиваются
+	//РІ РѕСЂРёРіРёРЅР°Р»СЊРЅРѕРј РєРѕРґРµ РЅРёРіРґРµ РёРј Р·РЅР°С‡РµРЅРёСЏ РЅРµ РїСЂРёСЃРІР°РёРІР°СЋС‚СЃСЏ
 	unsigned __int8 v59;
 	unsigned __int8 v60;
 	unsigned __int8 v80;
@@ -282,7 +234,7 @@ bool __fastcall func_558EB0(int* tractor, int EDX){
 	v279.y = v271 * v277.right.y + v10 * v277.at.y + v272 * v277.top.y + v277.pos.y;
 	v279.z = v271 * v277.right.z + v10 * v277.at.z + v272 * v277.top.z + v277.pos.z;
 	/////
-	//зачем, а главное для чего, если результат всё равно не используется? что за лол...
+	//Р·Р°С‡РµРј, Р° РіР»Р°РІРЅРѕРµ РґР»СЏ С‡РµРіРѕ, РµСЃР»Рё СЂРµР·СѓР»СЊС‚Р°С‚ РІСЃС‘ СЂР°РІРЅРѕ РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ? С‡С‚Рѕ Р·Р° Р»РѕР»...
 	//CVector::GetNormalized(&v426, &v278);
 	//CVector::GetNormalized(&v425, &v279);
 
@@ -524,10 +476,10 @@ bool __fastcall func_558EB0(int* tractor, int EDX){
 			//vehSTrailer->task.carData->unk2.field_104[LODWORD(v280)] = v369;
 			((CVector *)((char*)strailerCar_V + 0x2700 + 0x104))[v280] = v369;
 		} else {
-			//нормальное движение полуприцепа
+			//РЅРѕСЂРјР°Р»СЊРЅРѕРµ РґРІРёР¶РµРЅРёРµ РїРѕР»СѓРїСЂРёС†РµРїР°
 			float v56 = sqrt(*strailerMass * *tractorMass / (*strailerMass + *tractorMass));
 			float v254 = v56;
-			float v259 = v56 * 5000.0; //а что это?
+			float v259 = v56 * 5000.0; //Р° С‡С‚Рѕ СЌС‚Рѕ?
 			float v58 = v258;
 
 			if ( !(v59 | v60) )
@@ -562,7 +514,7 @@ bool __fastcall func_558EB0(int* tractor, int EDX){
 			CVector v400;
 			v400.setFromArgs(v71, v70, v69);
 
-			float v72 = v254 * 1000.0; //сопротивление инерции?
+			float v72 = v254 * 1000.0; //СЃРѕРїСЂРѕС‚РёРІР»РµРЅРёРµ РёРЅРµСЂС†РёРё?
 
 			float v295 = axisZvector.y;
 			float v294 = axisZvector.x;
@@ -583,7 +535,7 @@ bool __fastcall func_558EB0(int* tractor, int EDX){
 			}
 			float v255 = v301.getLength();
 
-			//а куда? вызов функции есть, а значение никуда не сохраняется
+			//Р° РєСѓРґР°? РІС‹Р·РѕРІ С„СѓРЅРєС†РёРё РµСЃС‚СЊ, Р° Р·РЅР°С‡РµРЅРёРµ РЅРёРєСѓРґР° РЅРµ СЃРѕС…СЂР°РЅСЏРµС‚СЃСЏ
 			//CVector::Length(&v282);
 
 			float v77 = v259 + v259;
@@ -723,9 +675,9 @@ bool __fastcall func_558EB0(int* tractor, int EDX){
 			CVector::CrossProduct(&v386, &v290.top, &v277.top);
 			//v386 = CVector::CrossProduct(v290.top, v277.top);
 			
-			
 			float v145 = v386.getLength();
-			//"выпрямитель" сцепки
+			
+			//"РІС‹РїСЂСЏРјРёС‚РµР»СЊ" СЃС†РµРїРєРё, РєРѕРіРґР° СѓРіРѕР» РјРµР¶РґСѓ С‚СЏРіР°С‡РѕРј Рё РїСЂРёС†РµРїРѕРј СЃР»РёС€РєРѕРј РІРµР»РёРє
 			if ( v145 > 0.5340707511102649 ) {
 				float v146 = strailerInertia->z * tractorInertia->z * (v145 - 0.5340707511102649) * v145 * 10.0 / (strailerInertia->z + tractorInertia->z);
 				CVector* v147 = CVector::GetScaled(&v386, v146);
@@ -845,7 +797,7 @@ bool __fastcall func_558EB0(int* tractor, int EDX){
 			Car_V::sub_4FAE40(strailerCar_V, v300);
 		}
 
-		//не знаю, в чём разница, но по коду так сделано, пускай будет и здесь
+		//РЅРµ Р·РЅР°СЋ, РІ С‡С‘Рј СЂР°Р·РЅРёС†Р°, РЅРѕ РїРѕ РєРѕРґСѓ С‚Р°Рє СЃРґРµР»Р°РЅРѕ, РїСѓСЃРєР°Р№ Р±СѓРґРµС‚ Рё Р·РґРµСЃСЊ
 		if ( result || *coupler_state == -1 ){
 			CVector trc_a2, trc_a3;
 			CVector trl_a2, trl_a3;
@@ -904,7 +856,7 @@ bool __fastcall func_558EB0(int* tractor, int EDX){
 			result = 0;
 
 			if ( tractorVar || strailerVar ) {
-				//кстати так немного свободнее рулится
+				//РєСЃС‚Р°С‚Рё С‚Р°Рє РЅРµРјРЅРѕРіРѕ СЃРІРѕР±РѕРґРЅРµРµ СЂСѓР»РёС‚СЃСЏ
 				//memcpy(&playerCar_mtx, (const void *)(((char*)tractorCar_V) + 0x29F0), 0x30u);
 				//memcpy(&trailerCar_mtx, (const void *)(((char*)strailerCar_V) + 0x29F0), 0x30u);
 
